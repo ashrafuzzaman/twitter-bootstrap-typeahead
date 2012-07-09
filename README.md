@@ -9,6 +9,9 @@ An extension of the Twitter Bootstrap Typeahead plugin<br />
 
 About
 -----------------
+This is a fork form <https://github.com/tcrosen/twitter-bootstrap-typeahead>. The extra that is added in the plugin is to support template for item. See the usage with template.
+
+
 All the thanks in the world to [@mdo](https://twitter.com/#!/mdo) and [@fat](https://twitter.com/#!/fat) of [@twitter](https://twitter.com/) for the wonderful Bootstrap utility.<br />
 I required more functionality out of the Typeahead plugin so I created this extension with some additional features:
 
@@ -270,6 +273,18 @@ Or using a remote data source:
 
     $('#myElement').typeahead({
         ajax: '/path/to/mySource'
+    });
+
+Using a remote data source with template item:
+
+    $('#myElement').typeahead({
+        ajax: {
+            url: '/path/to/mySource',
+            method: "get",
+            displayField: "name"
+        },
+        item: '<li><img height="25px" src="#{profile_pic_thumb_url}"/><a style="display: inline; vertical-align:middle; padding-left: 2px;" href="#">#{name}</a></li>',
+        val: 'id'
     });
 
 Examples demonstrating various options are included in this project under the `/demo` folder
