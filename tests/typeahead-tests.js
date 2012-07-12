@@ -173,4 +173,24 @@
 
         typeahead.$menu.remove();
     });
+
+    test("should show menu with template when query entered", function () {
+        var $input = $('<input />').typeahead({
+                source: [{ id: 1, name: 'aa', profile_url: '/aa.jpg' }, { id: 2, name: 'ab', profile_url: '/ab.jpg' }, { id: 3, name: 'ac', profile_url: '/ac.jpg'}],
+                item: '<li><img src="#{profile_url}"/><a href="#">#{name}</a></li>',
+            }),
+            typeahead = $input.data('typeahead');
+
+        $input.val('a');
+        typeahead.lookup();
+
+        ok(typeahead.$menu.is(":visible"), 'typeahead is visible');
+        equal(typeahead.$menu.find('li').length, 3, 'has 3 items in menu');
+        equal(typeahead.$menu.find('.active').length, 1, 'one item is active');
+        equal(typeahead.$menu.find('li').first().html(), 
+        			'<img src="/aa.jpg"><a href="#"><strong>a</strong><strong>a</strong></a>', 
+        			'the template is rendered');
+
+        typeahead.$menu.remove();
+    });
 });
